@@ -1,9 +1,7 @@
 //Instantiate vee-validate plugin
 Vue.use(VeeValidate);
-// https://codepen.io/izobiz/pen/vgeWaY?editors=1000
-
 var app = new Vue({
-    el: '#gpaCalculatorApp',
+    el: '#semesterGPAApp',
     data: {
         show: true,
         courses:[
@@ -21,15 +19,6 @@ var app = new Vue({
         totalCourse:1,
     },
     methods:{
-        calculateGPA: function(){
-            this.semester = this._calculateGPA();
-        },
-        showGPA: function(){
-            this.show = true;
-        },
-        hideGPA: function(){
-            this.show = false;
-        },
         addRow: function(){
             this.courses.push({
                 id: ++this.totalCourse,
@@ -42,6 +31,24 @@ var app = new Vue({
         removeRow: function(index){
             this.courses.splice(index, 1);
             this.calculateGPA();
+        },
+        calculateGPA: function(){
+            this.semester = this._calculateGPA();
+        },
+        _calculateGPA: function(){
+            const semester      = this.getSemesterTotal();
+            const semesterGPA   = (semester.gpa / semester.gpaHours).toFixed(2);
+
+            return (semesterGPA > -1 && semester.totalHours > -1) ?
+                {
+                    hours: semester.totalHours,
+                    gpa: semesterGPA,
+                }
+                :
+                {
+                    hours: '?',
+                    gpa: '?',
+                };
         },
         getSemesterTotal: function(){
             return this.courses.reduce(function(semester, course){
@@ -56,33 +63,78 @@ var app = new Vue({
                 return semester;
             }, {totalHours: 0, gpa: 0, gpaHours:0});
         },
-        _calculateGPA: function(){
-            const semester      = this.getSemesterTotal();
-            const semesterGPA   = (semester.gpa / semester.gpaHours).toFixed(2);
-            return (semesterGPA > -1 && semester.totalHours > -1) ?
-                {
-                    hours: semester.totalHours,
-                    gpa: semesterGPA,
-                }
-                :
-                {
-                    hours: '?',
-                    gpa: '?',
-                };
-        }
     },
     watch: {
-        'courses': {
+        'courses':
+        {
             handler: function(){
                 this.calculateGPA();
             },
             deep: true
         },
     },
-    filters: {
-        formatGPA: function(gpa){
+});
 
-            return gpa;
+var app = new Vue({
+    el: '#targetGPAApp',
+    data: {
+        totalHours: '',
+        currentGPA: '',
+        targetGPA: '',
+        result: '',
+    },
+    methods:{
+        getTargetGPA: function(){
+            const RESULT_JOIN   = '<div> OR </div>';
+            const result = this._calculateTargetGPA(RESULT_JOIN);
+
+            this.result = this._formatOutputHTML(result, RESULT_JOIN);
+        },
+        _calculateTargetGPA:function(join){
+            const MAX_HOURS     = 160;
+            const MAX_GPA       = 4.0;
+            const totalHours    = parseInt(this.totalHours);
+            const currentGPA    = parseFloat(this.currentGPA);
+            const targetGPA     = parseFloat(this.targetGPA);
+            let result          = '';
+            for (let gpa = MAX_GPA; gpa >= 0; gpa -= 0.1) {
+                let requiredHours = Math.ceil((currentGPA - targetGPA) * totalHours / (targetGPA - gpa));
+                if (requiredHours > MAX_HOURS) {
+                    break;
+                }
+
+                let requiredGPA = this._formatGPA(gpa);
+                if (requiredHours > 0) {
+                        result += this._requiredHoursHTML(requiredHours, requiredGPA) + join;
+                }
+            }
+
+            return result;
+        },
+        _formatGPA: function(gpa){
+            //format GPA to 2 decimal places
+            return parseFloat(Math.round(gpa * 100) / 100).toFixed(2);
+        },
+        _requiredHoursHTML: function(requiredHours, requiredGPA){
+            const addSToHour = (requiredHours > 1) ? 's' : '';
+
+            return '<span class="text-info">' + requiredHours +
+                            ' hour' + addSToHour + ' with a GPA of ' + requiredGPA + '</span>';
+        },
+        _formatOutputHTML: function(result, join){
+            let output = '';
+            if (result !== '') {
+                result = this._removeOrphanORFromResult(result, join);
+                output = '<h5>To achieve your target GPA of ' + this.targetGPA  +  ', you will need :</h5><h6>' +  result + '</h6>';
+            } else {
+                output = '<h5 class="text-danger">Result cannot be calculated.</h5>'
+            }
+
+            return output;
+        },
+        _removeOrphanORFromResult: function(result, join){
+            //Remove the orphan OR at the end of the result string
+            return result.substring(-1, result.lastIndexOf(join));
         }
-    }
+    },
 });

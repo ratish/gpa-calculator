@@ -4,14 +4,21 @@ input[type="text"], select{
     border-radius: 0;
     font-size: 1.1em;
 }
-#gpaCalculatorApp {
+.gpa-app {
     font-family: 'RobotoLight', Arial, sans-serif;
 }
-#gpaCalculatorApp .remove-link{
+.gpa-app .remove-link{
 	color:#843534;
 	margin:0;
 	padding:6px 0;
 	text-transform: none;
+}
+.gpa-app .btn{
+	text-transform: none;
+}
+.form-label{
+	font-size: 1.2em;
+	color:#555555;
 }
 .box-round{
 	border-radius: 200px;
