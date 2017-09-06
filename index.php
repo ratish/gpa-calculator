@@ -80,7 +80,7 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 			<h3>Calculate Target GPA</h3>
 			<div id="targetGPAApp" class="gpa-app">
 				<div class="row">
-					<div class="col-sm-offset-1 col-sm-3 well well-sm">
+					<div class="col-sm-3 well well-sm">
 						<fieldset>
 							<div class="row">
 								<div class="col-sm-12">

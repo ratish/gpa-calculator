@@ -78,48 +78,62 @@ var app = new Vue({
 var app = new Vue({
     el: '#targetGPAApp',
     data: {
-        totalHours: '',
-        currentGPA: '',
-        targetGPA: '',
+        totalHours: '3',
+        currentGPA: '3.1',
+        targetGPA: '3.2',
         result: '',
     },
     methods:{
         getTargetGPA: function(){
-            const RESULT_JOIN   = '<div> OR </div>';
+            const RESULT_JOIN   = '<br> OR <br>';
             const result = this._calculateTargetGPA(RESULT_JOIN);
 
             this.result = this._formatOutputHTML(result, RESULT_JOIN);
         },
-        _calculateTargetGPA:function(join){
-            const MAX_HOURS     = 160;
-            const MAX_GPA       = 4.0;
-            const totalHours    = parseInt(this.totalHours);
-            const currentGPA    = parseFloat(this.currentGPA);
-            const targetGPA     = parseFloat(this.targetGPA);
-            let result          = '';
+        _calculateTargetGPA: function(join){
+            const MAX_HOURS = 160;
+            const MAX_GPA = 4.0;
+            let result = '';
+            let prevHours = this._calculateHours(MAX_GPA);
+            let gpaList = [];
             for (let gpa = MAX_GPA; gpa >= 0; gpa -= 0.1) {
-                let requiredHours = Math.ceil((currentGPA - targetGPA) * totalHours / (targetGPA - gpa));
-                if (requiredHours > MAX_HOURS) {
+                let requiredHours = this._calculateHours(gpa);
+                if (requiredHours > MAX_HOURS || requiredHours < 1) {
                     break;
                 }
 
                 let requiredGPA = this._formatGPA(gpa);
                 if (requiredHours > 0) {
-                        result += this._requiredHoursHTML(requiredHours, requiredGPA) + join;
+                    if (prevHours !== requiredHours) {
+                        result += this._requiredHoursHTML(prevHours, gpaList) + join;
+                        gpaList = [];
+                        gpaList.unshift(requiredGPA);
+                    } else {
+                        gpaList.unshift(requiredGPA);
+                    }
                 }
+                prevHours = requiredHours;
             }
+            result += this._requiredHoursHTML(prevHours, gpaList) + join;
 
             return result;
+        },
+        _calculateHours: function(max_gpa){
+            const totalHours    = parseInt(this.totalHours);
+            const currentGPA    = parseFloat(this.currentGPA);
+            const targetGPA     = parseFloat(this.targetGPA);
+
+            return Math.ceil((currentGPA - targetGPA) * totalHours / (targetGPA - max_gpa));
         },
         _formatGPA: function(gpa){
             //format GPA to 2 decimal places
             return parseFloat(Math.round(gpa * 100) / 100).toFixed(2);
         },
-        _requiredHoursHTML: function(requiredHours, requiredGPA){
+        _requiredHoursHTML: function(requiredHours, gpaList){
             const addSToHour = (requiredHours > 1) ? 's' : '';
 
             return '<span class="text-info">' + requiredHours +
-                            ' hour' + addSToHour + ' with a GPA of ' + requiredGPA + '</span>';
+                            ' hour' + addSToHour + ' with a GPA of ' + gpaList.join(' or ') + '.</span>';
         },
         _formatOutputHTML: function(result, join){
             let output = '';
