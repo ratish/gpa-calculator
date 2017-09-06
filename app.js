@@ -15,6 +15,7 @@ var app = new Vue({
         semester:{
             hours: '?',
             gpa: '?',
+            gpaClass: 'box-grey',
         },
         totalCourse:1,
     },
@@ -38,16 +39,18 @@ var app = new Vue({
         _calculateGPA: function(){
             const semester = this.getSemesterTotal();
             const semesterGPA = (semester.gpa / semester.gpaHours).toFixed(2);
-
+            const gpaClass = this._getGPAClass(semesterGPA);
             return (semesterGPA > -1 && semester.totalHours > -1) ?
                 {
                     hours: semester.totalHours,
                     gpa: semesterGPA,
+                    gpaClass: gpaClass,
                 }
                 :
                 {
                     hours: '?',
                     gpa: '?',
+                    gpaClass: gpaClass
                 };
         },
         getSemesterTotal: function(){
@@ -63,6 +66,19 @@ var app = new Vue({
                 return semester;
             }, {totalHours: 0, gpa: 0, gpaHours:0});
         },
+        _getGPAClass: function(gpa){
+            if (gpa >= 2.5) {
+                return 'box-green';
+            }
+            if (gpa >= 2 && gpa < 2.5) {
+                return 'box-yellow';
+            }
+            if (gpa < 2) {
+                return 'box-red';
+            }
+
+            return 'box-grey';
+        }
     },
     watch: {
         'courses':

@@ -68,7 +68,7 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 						</div>
 					</div>
 					<div class="col-sm-3 text-center">
-						<div class="box-round box-green">
+						<div class="box-round" v-bind:class="semester.gpaClass">
 							<div class="box-title">Semester GPA</div>
 							<div v-if="show" id="semesterGPA" class="box-total change-transition">{{ semester.gpa }}</div>
 						</div>
@@ -80,7 +80,7 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 			<h3>Calculate Target GPA</h3>
 			<div id="targetGPAApp" class="gpa-app">
 				<div class="row">
-					<div class="col-sm-3 well well-sm">
+					<div class="col-sm-offset-1 col-sm-3 well well-sm">
 						<fieldset>
 							<div class="row">
 								<div class="col-sm-12">
