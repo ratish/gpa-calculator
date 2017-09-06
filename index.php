@@ -14,11 +14,11 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 ?>
 <div>
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation"><a href="#semesterGPATab" aria-controls="semesterGPATab" role="tab" data-toggle="tab">Calculate Semester GPA</a></li>
-		<li role="presentation" class="active"><a href="#targetGPATab" aria-controls="targetGPATab" role="tab" data-toggle="tab">Calculate Target GPA</a></li>
+		<li role="presentation" class="active"><a href="#semesterGPATab" aria-controls="semesterGPATab" role="tab" data-toggle="tab">Calculate Semester GPA</a></li>
+		<li role="presentation"><a href="#targetGPATab" aria-controls="targetGPATab" role="tab" data-toggle="tab">Calculate Target GPA</a></li>
 	</ul>
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-pane" id="semesterGPATab">
+		<div role="tabpanel" class="tab-pane active" id="semesterGPATab">
 			<h3>Calculate Semester GPA</h3>
 			<div id="semesterGPAApp" class="gpa-app">
 				<div class="row">
@@ -76,7 +76,7 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 			    </div>
 			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane active" id="targetGPATab">
+		<div role="tabpanel" class="tab-pane" id="targetGPATab">
 			<h3>Calculate Target GPA</h3>
 			<div id="targetGPAApp" class="gpa-app">
 				<div class="row">
