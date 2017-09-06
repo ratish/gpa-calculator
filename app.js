@@ -86,9 +86,14 @@ var app = new Vue({
     methods:{
         getTargetGPA: function(){
             const RESULT_JOIN = '<br> OR <br>';
-            const result = this._calculateTargetGPA(RESULT_JOIN);
+            this.$validator.validateAll().then((result) => {
+                if (result) {
+                    const result = this._calculateTargetGPA(RESULT_JOIN);
 
-            this.result = this._formatOutputHTML(result, RESULT_JOIN);
+                    this.result = this._formatOutputHTML(result, RESULT_JOIN);
+                    return;
+                }
+            });
         },
         _calculateTargetGPA: function(join){
             const MAX_HOURS = 160;

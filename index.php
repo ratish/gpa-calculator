@@ -86,16 +86,19 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 								<div class="col-sm-12">
 									<form name="targetGPAForm" id="targetGPAForm" method="post" novalidate>
 										<div class="form-group">
-											<label for="totalCreditHours">Total Credit Hours Attempted</label>
-		    								<input v-model.trim="totalHours" type="text" class="form-control" id="totalCreditHours" name="totalCreditHours">
+											<label for="totalHours">Total Credit Hours Attempted</label>
+		    								<input v-model.trim="totalHours" v-validate="'required|decimal:2|between:1,160'" :class="{'input': true, 'text-danger': errors.has('totalHours') }" data-vv-as="Total Credit Hours" type="text" class="form-control" id="totalHours" name="totalHours">
+		    								<span v-show="errors.has('totalHours')" class="help text-danger">{{ errors.first('totalHours') }}</span>
 		    							</div>
 		    							<div class="form-group">
 											<label for="currentGPA">Current GPA</label>
-		    								<input v-model.trim="currentGPA" type="text" class="form-control" id="currentGPA" name="currentGPA">
+		    								<input v-model.trim="currentGPA" v-validate="'required|decimal:2|between:0,4'" :class="{'input': true, 'text-danger': errors.has('currentGPA') }" data-vv-as="Current GPA" type="text" class="form-control" id="currentGPA" name="currentGPA">
+		    								<span v-show="errors.has('currentGPA')" class="help text-danger">{{ errors.first('currentGPA') }}</span>
 		    							</div>
 		    							<div class="form-group">
 											<label for="targetGPA">Target GPA</label>
-		    								<input v-model.trim="targetGPA" type="text" class="form-control" id="targetGPA" name="targetGPA">
+		    								<input v-model.trim="targetGPA" v-validate="'required|decimal:2|between:0,4'" :class="{'input': true, 'text-danger': errors.has('targetGPA') }" data-vv-as="Target GPA" type="text" class="form-control" id="targetGPA" name="targetGPA">
+		    								<span v-show="errors.has('targetGPA')" class="help text-danger">{{ errors.first('targetGPA') }}</span>
 		    							</div>
 										<div class="text-right">
 											<button v-on:click="getTargetGPA();" type="button" class="btn btn-primary btn-lg btn-block">Calculate</button>
