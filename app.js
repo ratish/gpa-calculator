@@ -36,8 +36,8 @@ var app = new Vue({
             this.semester = this._calculateGPA();
         },
         _calculateGPA: function(){
-            const semester      = this.getSemesterTotal();
-            const semesterGPA   = (semester.gpa / semester.gpaHours).toFixed(2);
+            const semester = this.getSemesterTotal();
+            const semesterGPA = (semester.gpa / semester.gpaHours).toFixed(2);
 
             return (semesterGPA > -1 && semester.totalHours > -1) ?
                 {
@@ -52,8 +52,8 @@ var app = new Vue({
         },
         getSemesterTotal: function(){
             return this.courses.reduce(function(semester, course){
-                const creditHour= parseFloat(course.creditHour);
-                const grade     = parseFloat(course.grade);
+                const creditHour = parseFloat(course.creditHour);
+                const grade = parseFloat(course.grade);
                 semester.totalHours += creditHour;
                 if (grade > -1) {
                     semester.gpaHours += parseFloat(creditHour);
@@ -78,14 +78,14 @@ var app = new Vue({
 var app = new Vue({
     el: '#targetGPAApp',
     data: {
-        totalHours: '3',
-        currentGPA: '3.1',
-        targetGPA: '3.2',
+        totalHours: '',
+        currentGPA: '',
+        targetGPA: '',
         result: '',
     },
     methods:{
         getTargetGPA: function(){
-            const RESULT_JOIN   = '<br> OR <br>';
+            const RESULT_JOIN = '<br> OR <br>';
             const result = this._calculateTargetGPA(RESULT_JOIN);
 
             this.result = this._formatOutputHTML(result, RESULT_JOIN);
@@ -114,14 +114,15 @@ var app = new Vue({
                 }
                 prevHours = requiredHours;
             }
+            //Add the last one to the list since the last will not be added in the loop before exiting the loop
             result += this._requiredHoursHTML(prevHours, gpaList) + join;
 
             return result;
         },
         _calculateHours: function(max_gpa){
-            const totalHours    = parseInt(this.totalHours);
-            const currentGPA    = parseFloat(this.currentGPA);
-            const targetGPA     = parseFloat(this.targetGPA);
+            const totalHours = parseInt(this.totalHours);
+            const currentGPA = parseFloat(this.currentGPA);
+            const targetGPA = parseFloat(this.targetGPA);
 
             return Math.ceil((currentGPA - targetGPA) * totalHours / (targetGPA - max_gpa));
         },
