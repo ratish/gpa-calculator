@@ -38,7 +38,7 @@ var app = new Vue({
         },
         _calculateGPA: function(){
             const semester = this.getSemesterTotal();
-            const semesterGPA = (semester.gpa / semester.gpaHours).toFixed(2);
+            const semesterGPA = (semester.gpa / semester.gpaHours).toFixed(3);
             const gpaClass = this._getGPAClass(semesterGPA);
             return (semesterGPA > -1 && semester.totalHours > -1) ?
                 {
@@ -149,7 +149,7 @@ var app = new Vue({
         },
         _formatGPA: function(gpa){
             //format GPA to 2 decimal places
-            return parseFloat(Math.round(gpa * 100) / 100).toFixed(2);
+            return parseFloat(Math.round(gpa * 100) / 100).toFixed(3);
         },
         _requiredHoursHTML: function(requiredHours, gpaList){
             const addSToHour = (requiredHours > 1) ? 's' : '';
