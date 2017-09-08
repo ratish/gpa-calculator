@@ -4,6 +4,12 @@ input[type="text"], select{
     border-radius: 0;
     font-size: 1.1em;
 }
+.border-bottom{
+	border-bottom: 1px solid #CCCCCC;
+}
+.tab-section{
+	margin:20px 0;
+}
 .gpa-app {
     font-family: 'RobotoLight', Arial, sans-serif;
 }

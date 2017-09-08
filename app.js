@@ -17,7 +17,7 @@ var app = new Vue({
             gpa: '?',
             gpaClass: 'box-grey',
         },
-        totalCourse:1,
+        totalCourse: 1,
     },
     methods:{
         addRow: function(){
@@ -31,6 +31,7 @@ var app = new Vue({
         },
         removeRow: function(index){
             this.courses.splice(index, 1);
+            --this.totalCourse;
             this.calculateGPA();
         },
         calculateGPA: function(){
@@ -59,7 +60,7 @@ var app = new Vue({
                 const grade = parseFloat(course.grade);
                 semester.totalHours += creditHour;
                 if (grade > -1) {
-                    semester.gpaHours += parseFloat(creditHour);
+                    semester.gpaHours += creditHour;
                     semester.gpa += (creditHour * grade);
                 }
 
@@ -128,7 +129,7 @@ var app = new Vue({
                     if (prevHours !== requiredHours) {
                         result += this._requiredHoursHTML(prevHours, gpaList) + join;
                         gpaList = [];
-                        gpaList.unshift(requiredGPA);
+                        gpaList.push(requiredGPA);
                     } else {
                         gpaList.unshift(requiredGPA);
                     }
@@ -172,5 +173,97 @@ var app = new Vue({
             //Remove the orphan OR at the end of the result string
             return result.substring(-1, result.lastIndexOf(join));
         }
+    },
+});
+
+var app = new Vue({
+    el: '#reverseGPAApp',
+    data: {
+        show: true,
+        courses:[
+            {
+                id: 1,
+                title: '',
+                creditHour: '',
+                grade: '',
+            }
+        ],
+        semesterGPA: '',
+        totalSemeterHours: '',
+        totalCourse: 1,
+    },
+    methods:{
+        addRow: function(){
+            this.courses.push({
+                id: ++this.totalCourse,
+                title: '',
+                creditHour: '',
+                grade: '',
+            });
+        },
+        removeRow: function(index){
+            this.courses.splice(index, 1);
+            --this.totalCourse;
+        },
+        calculateReverseGPA: function(){
+            this.totalSemeterHours = this._getTotalSemeterHours();
+
+            this._calculateCumulativeAndAssignGrades();
+        },
+        _calculateCumulativeAndAssignGrades: function(){
+            const gradeInfo = this._getGradeInfo(this.courses);
+            const totalSemeterHours = this.totalSemeterHours;
+            const totalCumulativePoints = totalSemeterHours * this.semesterGPA;
+
+            this._assignLetterToEmptyGrades(gradeInfo, totalSemeterHours, totalCumulativePoints);
+        },
+        _assignLetterToEmptyGrades: function(gradeInfo, totalSemeterHours, totalCumulativePoints){
+            let cumulativePointsDiff = totalCumulativePoints - gradeInfo.cumulativePoints;
+            let hoursDiff = totalSemeterHours - gradeInfo.totalHours;
+            if (cumulativePointsDiff / hoursDiff > 4) {
+                alert('It is not possible to achieve this result with the given values.');
+            } else {
+                const emptyGradeList = gradeInfo.emptyGradeList;
+                const emptyListLength = emptyGradeList.length;
+                for (i = 0; i < emptyListLength; i++) {
+                    let gradeAvg = Math.ceil(cumulativePointsDiff / hoursDiff);
+                    let currentIndex = emptyGradeList[i];
+                    this.courses[currentIndex].grade = gradeAvg.toFixed(1);
+                    cumulativePointsDiff -= gradeAvg * this.courses[currentIndex].creditHour;
+                    hoursDiff -= this.courses[currentIndex].creditHour;
+                }
+            }
+        },
+        _getGradeInfo: function() {
+            let gradeInfo = {
+                emptyGradeList:[],
+                cumulativePoints: 0,
+                totalHours: 0,
+            };
+            const loopLimit = this.totalCourse;
+            for (var i = 0; i < loopLimit; i++) {
+                let grade = parseFloat(this.courses[i].grade);
+                if (! grade) {
+                    grade = '';
+                }
+                let hours = this.courses[i].creditHour;
+                if (grade === '') {
+                    gradeInfo.emptyGradeList.push(i);
+                } else {
+                    gradeInfo.cumulativePoints += grade * hours;
+                    gradeInfo.totalHours += hours * 1.0;
+                }
+            }
+
+            return gradeInfo;
+        },
+        _getTotalSemeterHours: function(){
+            return this.courses.reduce(function(totalHours, course){
+                let creditHour = parseFloat(course.creditHour);
+                if (! isNaN(creditHour)) {
+                    return totalHours += creditHour;
+                }
+            }, 0);
+        },
     },
 });
