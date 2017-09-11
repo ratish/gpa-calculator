@@ -60,3 +60,9 @@ input[type="text"], select{
 	font-size: 3em;
 	font-weight: bold;
 }
+.instruction-list{
+	padding:0 25px;
+}
+.instruction-list li{
+	line-height: 25px;
+}
