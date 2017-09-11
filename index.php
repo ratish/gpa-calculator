@@ -126,7 +126,6 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 						<ol class="instruction-list">
 							<li>Enter the names of your courses. (optional)</li>
 							<li>Enter the corresponding credit hours for each course. <span class="text-danger">(required)</span></li>
-							<li>Select grades of courses, if known, but at least one of the grades must be blank. (optional)</li>
 							<li>Enter your desired semester GPA in the <strong>Semester GPA</strong> text box. <span class="text-danger">(required)</span></li>
 							<li>Click on the <strong>Calculate Reverse GPA</strong> button</li>
 						</ol>
