@@ -48,7 +48,6 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 											<option value="2.0">C</option>
 											<option value="1.0">D</option>
 											<option value="0.0">F</option>
-											<option value="-1.0">P</option>
 										</select>
 									</div>
 									<div class="col-sm-1">
@@ -158,7 +157,6 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 											<option value="2.0">C</option>
 											<option value="1.0">D</option>
 											<option value="0.0">F</option>
-											<option value="-1.0">P</option>
 										</select>
 									</div>
 									<div class="col-sm-1">
