@@ -218,7 +218,7 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 include_once '/usr2/phpincludes/southeastern_tmpl_new/bottom_contents.php';
 include_once '/usr2/phpincludes/southeastern_tmpl_new/js_contents.php';
 ?>
-<script src="https://vuejs.org/js/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 <script src="https://unpkg.com/vee-validate@2.0.0-rc.7"></script>
 <script src="app.js?13"></script>
 <?php
