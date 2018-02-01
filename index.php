@@ -220,6 +220,6 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/js_contents.php';
 ?>
 <script src="https://vuejs.org/js/vue.js"></script>
 <script src="https://unpkg.com/vee-validate@2.0.0-rc.7"></script>
-<script src="app.js"></script>
+<script src="app.js?13"></script>
 <?php
 include_once '/usr2/phpincludes/southeastern_tmpl_new/html_close.php';
