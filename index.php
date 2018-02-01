@@ -22,6 +22,19 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane active" id="semesterGPATab">
 			<h3>Calculate Semester GPA</h3>
+			<div class="row">
+				<div class="col-sm-offset-1 col-sm-10">
+					<div class="well well-sm">
+						<h5 class="border-bottom">How to calculate Semester GPA</h5>
+						<ol class="instruction-list">
+							<li>Enter the names of your courses. (optional)</li>
+							<li>Enter corresponding credit hours for each course. <span class="text-danger">(required)</span></li>
+							<li>Select corresponding grade for each course. <span class="text-danger">(required)</span></li>
+							<li>Semester GPA and Total Credit Hours will be calculated and displayed automatically at the bottom.</li>
+						</ol>
+					</div>
+				</div>
+			</div>
 			<div id="semesterGPAApp" class="gpa-app">
 				<div class="row">
 					<div class="col-sm-offset-1 col-sm-10 well well-sm">
@@ -126,7 +139,15 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 							<li>Enter the names of your courses. (optional)</li>
 							<li>Enter the corresponding credit hours for each course. <span class="text-danger">(required)</span></li>
 							<li>Enter your desired semester GPA in the <strong>Semester GPA</strong> text box. <span class="text-danger">(required)</span></li>
-							<li>Click on the <strong>Calculate Reverse GPA</strong> button</li>
+							<li>Click on the <strong>Calculate Reverse GPA</strong> button.</li>
+						</ol>
+
+						<h5 class="border-bottom">How to calculate Semester GPA</h5>
+						<ol class="instruction-list">
+							<li>Enter the names of your courses. (optional)</li>
+							<li>Enter corresponding credit hours for each course. <span class="text-danger">(required)</span></li>
+							<li>Select corresponding grade for each course. <span class="text-danger">(required)</span></li>
+							<li>Click on the <strong>Calculate Semester GPA</strong> button.</li>
 						</ol>
 					</div>
 				</div>
@@ -172,10 +193,19 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 										<button  v-on:click="addRow" type="button" class="btn btn-default">+ Add Another Course</button>
 									</div>
 								</div>
-								<div class="text-right">
-									<button v-on:click="calculateReverseGPA();" type="button" class="btn btn-primary btn-lg btn-block">Calculate Reverse GPA</button>
+							  	<h5><span class="form-label">Total Credit Hours: {{ totalSemesterHours }}</span></h5>
+								<div class="form-group">
+									<div class="col-sm-6">
+										<div >
+											<button v-on:click="calculateReverseGPA();" type="button" class="btn btn-primary btn-lg btn-block">Calculate Reverse GPA</button>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div>
+											<button v-on:click="calculateGPA();" type="button" class="btn btn-default btn-lg btn-block">Calculate Semester GPA</button>
+										</div>
+									</div>
 								</div>
-							  	<h5><span class="form-label">Total Credit Hours: {{ totalSemeterHours }}</span></h5>
 							</form>
 						</fieldset>
 					</div>
