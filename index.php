@@ -1,19 +1,19 @@
 <?php
-	include_once '/usr2/phpincludes/southeastern_tmpl_new/html_open.php';
+	include_once '/usr2/phpincludes/southeastern_tmpl/html_open.php';
 ?>
   <title>GPA Calculator</title>
 <?php
-	include_once '/usr2/phpincludes/southeastern_tmpl_new/css_contents.php';
+	include_once '/usr2/phpincludes/southeastern_tmpl/css_contents.php';
 ?>
 	<link rel="stylesheet" type="text/css" href="style.css">
 <?php
-include_once '/usr2/phpincludes/southeastern_tmpl_new/js_header.php';
-include_once '/usr2/phpincludes/southeastern_tmpl_new/header_close.php';
-include_once '/usr2/phpincludes/southeastern_tmpl_new/body_open.php';
-include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/js_header.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/header_close.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/body_open.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/top_contents.php';
 ?>
 <div>
-	<h2 class="border-bottom">GPA CALCULATORS</h2>
+	<h1 class="border-bottom">GPA CALCULATORS</h1>
 	<ul class="nav nav-tabs tab-section" role="tablist">
 		<li role="presentation" class="active"><a href="#semesterGPATab" aria-controls="semesterGPATab" role="tab" data-toggle="tab">Calculate Semester GPA</a></li>
 		<li role="presentation"><a href="#targetGPATab" aria-controls="targetGPATab" role="tab" data-toggle="tab">Calculate Target GPA</a></li>
@@ -215,11 +215,11 @@ include_once '/usr2/phpincludes/southeastern_tmpl_new/top_contents.php';
 	</div>
 </div>
 <?php
-include_once '/usr2/phpincludes/southeastern_tmpl_new/bottom_contents.php';
-include_once '/usr2/phpincludes/southeastern_tmpl_new/js_contents.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/bottom_contents.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/js_contents.php';
 ?>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 <script src="https://unpkg.com/vee-validate@2.0.0-rc.7"></script>
 <script src="app.js?13"></script>
 <?php
-include_once '/usr2/phpincludes/southeastern_tmpl_new/html_close.php';
+include_once '/usr2/phpincludes/southeastern_tmpl/html_close.php';
