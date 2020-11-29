@@ -1,68 +1,69 @@
-input[type="text"], select{
-    background-color: #FFFFFF;
-    border: 1px solid #CCCCCC;
+input[type="text"],
+select {
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
     border-radius: 0;
     font-size: 1.1em;
 }
-.border-bottom{
-	border-bottom: 1px solid #CCCCCC;
+.border-bottom {
+    border-bottom: 1px solid #cccccc;
 }
-.tab-section{
-	margin:20px 0;
+.tab-section {
+    margin: 20px 0;
 }
 .gpa-app {
-    font-family: 'RobotoLight', Arial, sans-serif;
+    font-family: "RobotoLight", Arial, sans-serif;
 }
-.gpa-app .remove-link{
-	color:#843534;
-	margin:0;
-	padding:6px 0;
-	text-transform: none;
+.gpa-app .remove-link {
+    color: #843534;
+    margin: 0;
+    padding: 6px 0;
+    text-transform: none;
 }
-.gpa-app .btn{
-	text-transform: none;
+.gpa-app .btn {
+    text-transform: none;
 }
-.form-label{
-	font-size: 1.2em;
-	color:#555555;
+.form-label {
+    font-size: 1.2em;
+    color: #555555;
 }
-.box-round{
-	border:4px solid #EEEEEE;
-	border-radius: 200px;
-	height: 150px;
-	width: 150px;
-	padding:25px 25px;
-	text-align: center;
+.box-round {
+    border: 4px solid #eeeeee;
+    border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    padding: 25px 25px;
+    text-align: center;
 }
-.box-round.box-grey{
-	background-color: #CCCCCC;
-	color:#444444;
+.box-round.box-grey {
+    background-color: #cccccc;
+    color: #444444;
 }
-.box-round.box-green{
-	background-color: #3c763d;
-	color:#FFFFFF;
+.box-round.box-green {
+    background-color: #3c763d;
+    color: #ffffff;
 }
-.box-round.box-yellow{
-	background-color:#EEBB11;
-	color:#FFFFFF;
+.box-round.box-yellow {
+    background-color: #eebb11;
+    color: #ffffff;
 }
-.box-round.box-red{
-	background-color: #A94442;
-	color:#FFFFFF;
+.box-round.box-red {
+    background-color: #a94442;
+    color: #ffffff;
 }
-.box-title{
-	font-size: 1em;
-	text-align: center
-	width: 80%;
+.box-title {
+    font-size: 1em;
+    text-align: center;
+    width: 80%;
 }
-.box-total{
-	margin-top:10px;
-	font-size: 3em;
-	font-weight: bold;
+.box-total {
+    margin-top: 10px;
+    font-size: 2em;
+    font-weight: bold;
 }
-.instruction-list{
-	padding:0 25px;
+.instruction-list {
+    padding: 0 25px;
 }
-.instruction-list li{
-	line-height: 25px;
+.instruction-list li {
+    line-height: 25px;
 }
